@@ -4,6 +4,7 @@ namespace App\Http\Resources;
 
 use App\Models\Parking;
 use App\Services\ParkingPriceService;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -18,6 +19,17 @@ class ParkingResource extends JsonResource
             $this->stop_time
         );
 
+        $startDate = $this->start_time;
+        $stopDate = $this->stop_time;
+
+        if ($startDate instanceof Carbon) {
+            $startDate = $this->start_time->format('Y-m-d H:i:s');
+        }
+
+        if ($stopDate instanceof Carbon) {
+            $stopDate = $this->stop_time->format('Y-m-d H:i:s');
+        }
+
         return [
             'id' => $this->id,
             'zone' => [
@@ -27,9 +39,9 @@ class ParkingResource extends JsonResource
             'vehicle' => [
                 'plate_number' => $this->vehicle->plate_number,
             ],
-            'start_time' => $this->start_time,
-            'stop_time' => $this->stop_time,
-            'total_price' => $this->total_price,
+            'start_time' => $startDate,
+            'stop_time' => $stopDate,
+            'total_price' => $totalPrice,
         ];
     }
 }
