@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Validation\ValidationException;
 
+/**
+ * @group Parking
+ */
 class ParkingController extends Controller
 {
     public function start(Request $request): ParkingResource
