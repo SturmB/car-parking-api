@@ -10,9 +10,9 @@ class Vehicle extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['user_id', 'plate_number'];
+    protected $fillable = ['user_id', 'plate_number', 'description'];
 
-    protected static function booted()
+    protected static function booted(): void
     {
         static::addGlobalScope('user', function (Builder $builder) {
             $builder->where('user_id', auth()->id());
