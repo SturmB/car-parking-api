@@ -14,6 +14,11 @@ use Illuminate\Validation\ValidationException;
  */
 class ParkingController extends Controller
 {
+    public function index()
+    {
+        return ParkingResource::collection(Parking::with('vehicle', 'zone')->active()->get());
+    }
+
     public function start(Request $request): ParkingResource
     {
         $parkingData = $request->validate([

@@ -33,6 +33,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::apiResource('vehicles', VehicleController::class);
 
+    Route::get('parkings', [ParkingController::class, 'index']);
     Route::post('parkings/start', [ParkingController::class, 'start']);
     Route::get('parkings/{parking}', [ParkingController::class, 'show'])->whereNumber('parking');
     Route::put('parkings/{parking}', [ParkingController::class, 'stop'])->whereNumber('parking');
