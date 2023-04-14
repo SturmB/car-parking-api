@@ -20,6 +20,11 @@ class ParkingController extends Controller
         return ParkingResource::collection(Parking::with('vehicle', 'zone')->active()->get());
     }
 
+    public function stoppedParkings()
+    {
+        return ParkingResource::collection(Parking::with('vehicle', 'zone')->stopped()->get());
+    }
+
     public function start(Request $request): ParkingResource|JsonResponse
     {
         $parkingData = $request->validate([
